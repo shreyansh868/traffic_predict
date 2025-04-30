@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block body %}
+<style>
+  .result-container {
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .result-title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .image-container img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+</style>
+
+<div class="result-container">
+  <h1 class="result-title">Predicted Output: {{ statement }}</h1>
+  <div class="image-container">
+    <img src="{{ url_for('static', filename='histo.png') }}" alt="Histogram" />
+    <img src="{{ url_for('static', filename='graphs.png') }}" alt="Graphs" />
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #dbeafe, #f0fdf4);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-top: 30px;
+      background: linear-gradient(90deg, #007cf0, #00dfd8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    label h2 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.2s ease-in-out;
+    }
+
+    input:focus, select:focus {
+      border-color: #007cf0;
+      outline: none;
+    }
+
+    .submit-container {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .btn-success {
+      background-color: #10b981;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-success:hover {
+      background-color: #059669;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .form-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Traffic Prediction using Deep Learning</h1>
+
+  <div class="form-container">
+    <form action="/predict" method="POST">
+      <div>
+        <label for="date"><h2>Date</h2></label>
+        <input type="date" name="date" id="date" />
+      </div>
+      <div>
+        <label for="day"><h2>Day</h2></label>
+        <select name="day" id="day">
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+      </div>
+      <div>
+        <label for="time"><h2>Time</h2></label>
+        <input type="time" name="time" id="time" />
+      </div>
+      <div>
+        <label for="temperature"><h2>Temperature (°C)</h2></label>
+        <input type="number" name="temperature" id="temperature" />
+      </div>
+      <div>
+        <label for="isholiday"><h2>Is Holiday</h2></label>
+        <select name="isholiday" id="isholiday">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+      <div>
+        <label for="x0"><h2>Climate Condition</h2></label>
+        <select name="x0" id="x0" onchange="fun(this)">
+          <option value="Clear">Clear</option>
+          <option value="Clouds">Clouds</option>
+          <option value="Drizzle">Drizzle</option>
+          <option value="Fog">Fog</option>
+          <option value="Haze">Haze</option>
+          <option value="Mist">Mist</option>
+          <option value="Rain">Rain</option>
+          <option value="Smoke">Smoke</option>
+          <option value="Snow">Snow</option>
+          <option value="Squall">Squall</option>
+          <option value="Thunderstorm">Thunderstorm</option>
+        </select>
+      </div>
+      <div>
+        <label for="x1"><h2>Weather Description</h2></label>
+        <select name="x1" id="x1">
+          <option value="Sky is Clear">Sky is Clear</option>
+          <option value="broken clouds">Broken Clouds</option>
+          <option value="drizzle">Drizzle</option>
+          <option value="very heavy rain">Very Heavy Rain</option>
+        </select>
+      </div>
+
+      <div class="submit-container">
+        <input type="submit" value="Predict" class="btn-success" />
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function fun(e) {
+      const body = document.querySelector('body');
+      const backgrounds = {
+        "Haze": "giphy.gif",
+        "Clear": "clear.gif",
+        "Drizzle": "Drizzle.gif",
+        "Fog": "Fog.gif",
+        "Clouds": "Clouds.gif",
+        "Mist": "mist.jpeg",
+        "Rain": "Rain.gif",
+        "Thunderstorm": "Thunderstorm.gif"
+      };
+      if (backgrounds[e.value]) {
+        body.style.background = `url(${backgrounds[e.value]})`;
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundRepeat = 'no-repeat';
+        body.style.backgroundAttachment = 'fixed';
+      }
+    }
+  </script>
+
+  {% block body %}{% endblock %}
+</body>
+</html>
