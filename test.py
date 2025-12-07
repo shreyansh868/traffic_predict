@@ -34,7 +34,7 @@ def root():
     return render_template('home.html')
 @app.route('/train')
 def train():
-    data = pd.read_csv('C:/Users/hp/OneDrive/Desktop/project/traffic predict/Traffic_Prediction-main/mp/static/Train.csv')
+    data = pd.read_csv('C:/Users/hp/OneDrive/Desktop/MY PC/project/traffic predict/traffic_volume_data.csv')
     data = data.sort_values(by=['date_time'], ascending=True).reset_index(drop=True)
     # Add traffic volume history features
     for n in [1, 2, 3, 4, 5, 6]:
