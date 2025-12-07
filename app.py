@@ -19,7 +19,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 def posix_time(dt):
     return (dt - datetime(1970, 1, 1)) / timedelta(seconds=1)
-data = pd.read_csv('C:/Users/hp/OneDrive/Desktop/project/traffic predict/Traffic_Prediction-main/mp/static/Train.csv')
+data = pd.read_csv('C:/Users/hp/OneDrive/Desktop/MY PC/project/traffic predict/traffic_volume_data.csv')
 data = data.sort_values(
     by=['date_time'], ascending=True).reset_index(drop=True)
 last_n_hours = [1, 2, 3, 4, 5, 6]
